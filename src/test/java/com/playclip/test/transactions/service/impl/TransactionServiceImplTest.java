@@ -3,6 +3,7 @@ package com.playclip.test.transactions.service.impl;
 import com.playclip.test.transactions.config.StorageInterfaceType;
 import com.playclip.test.transactions.config.StorageState;
 import com.playclip.test.transactions.dto.Transaction;
+import com.playclip.test.transactions.dto.UserTotal;
 import com.playclip.test.transactions.service.TransactionService;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,6 +75,22 @@ public class TransactionServiceImplTest {
     public void shouldReturnNull() {
         Queue<Transaction> transactions = transactionService.list(2l);
         assertNull(transactions);
+    }
+
+    @Test
+    public void shouldGetTotalFromTransactions() {
+        UserTotal userTotal = transactionService.sum(1l);
+        assertNotNull(userTotal);
+        assertEquals(userTotal.getUserId(), Long.valueOf(1l));
+        assertEquals(userTotal.getSum(), BigDecimal.valueOf(453.00d));
+    }
+
+    @Test
+    public void shouldGetTotalZeroWhenUserNotFound() {
+        UserTotal userTotal = transactionService.sum(2l);
+        assertNotNull(userTotal);
+        assertEquals(userTotal.getUserId(), Long.valueOf(2l));
+        assertEquals(userTotal.getSum(), BigDecimal.ZERO);
     }
 
 }

@@ -2,9 +2,10 @@ package com.playclip.test.transactions.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.UUID;
 
-public class Transaction implements Comparable {
+public class Transaction implements Comparable<Transaction> {
     private BigDecimal amount;
     private String description;
     private LocalDate date;
@@ -58,11 +59,13 @@ public class Transaction implements Comparable {
         this.transactionId = transactionId;
     }
 
+
     @Override
-    public int compareTo(Object o) {
-        LocalDate d = ((Transaction)o).getDate();
-        if(this.date.isAfter(d)) {
+    public int compareTo(Transaction o) {
+        if(this.date.isAfter(o.date)) {
             return 1;
+        }else if(this.date.isBefore(o.date)){
+            return -1;
         }else {
             return 0;
         }

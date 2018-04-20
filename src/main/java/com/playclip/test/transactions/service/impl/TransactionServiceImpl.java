@@ -6,15 +6,20 @@ import com.playclip.test.transactions.factory.TransactionGatewayFactory;
 import com.playclip.test.transactions.gateway.TransactionGateway;
 import com.playclip.test.transactions.service.TransactionService;
 
-import java.util.List;
+import java.util.Queue;
 import java.util.UUID;
 
 public class TransactionServiceImpl implements TransactionService {
 
-    TransactionGateway transactionGateway = TransactionGatewayFactory.getGateway();
+    TransactionGateway transactionGateway;
+
+    public TransactionServiceImpl() {
+        transactionGateway = TransactionGatewayFactory.getGateway();
+    }
 
     @Override
     public Transaction add(Transaction transaction) {
+        transaction.setTransactionId(UUID.randomUUID());
         return transactionGateway.add(transaction);
     }
 
@@ -24,8 +29,8 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> list(Long userId) {
-        return null;
+    public Queue<Transaction> list(Long userId) {
+        return transactionGateway.list(userId);
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Queue;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -18,8 +19,8 @@ public class TransactionServiceImplTest {
 
     @Before
     public void setUp() {
-        transactionService = new TransactionServiceImpl();
         StorageState.setStorageInterfaceType(StorageInterfaceType.MOCK);
+        transactionService = new TransactionServiceImpl();
     }
 
     @Test
@@ -44,6 +45,35 @@ public class TransactionServiceImplTest {
     public void shouldNotFoundTransaction() {
         Transaction transaction = transactionService.show(2l, UUID.randomUUID());
         assertNull(transaction);
+    }
+
+    @Test
+    public void shouldListTransactions() {
+        Queue<Transaction> transactions = transactionService.list(1l);
+        assertNotNull(transactions);
+        Transaction transaction = transactions.remove();
+        assertEquals(LocalDate.of(2018,04,16),
+                transaction.getDate());
+        assertEquals(BigDecimal.valueOf(151.00d), transaction.getAmount());
+        assertEquals("test description2", transaction.getDescription());
+
+        transaction = transactions.remove();
+        assertEquals(LocalDate.of(2018,04,16),
+                transaction.getDate());
+        assertEquals(BigDecimal.valueOf(152.00d), transaction.getAmount());
+        assertEquals("test description3", transaction.getDescription());
+
+        transaction = transactions.remove();
+        assertEquals(LocalDate.of(2018,04,17),
+                transaction.getDate());
+        assertEquals(BigDecimal.valueOf(150.00d), transaction.getAmount());
+        assertEquals("test description", transaction.getDescription());
+    }
+
+    @Test
+    public void shouldReturnNull() {
+        Queue<Transaction> transactions = transactionService.list(2l);
+        assertNull(transactions);
     }
 
 }

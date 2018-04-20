@@ -17,22 +17,24 @@ public class TransactionGatewayMock implements TransactionGateway {
                 BigDecimal.valueOf(150.00d), "test description");
         transaction.setTransactionId(UUID.randomUUID());
         Transaction transaction2 = new Transaction(1l, LocalDate.of(2018, 04,16),
-                BigDecimal.valueOf(150.00d), "test description");
+                BigDecimal.valueOf(151.00d), "test description2");
+        transaction.setTransactionId(UUID.randomUUID());
+        Transaction transaction3 = new Transaction(1l, LocalDate.of(2018, 04,16),
+                BigDecimal.valueOf(152.00d), "test description3");
         transaction.setTransactionId(UUID.randomUUID());
         transactions.add(transaction);
         transactions.add(transaction2);
+        transactions.add(transaction3);
     }
 
     @Override
     public Transaction add(Transaction transaction) {
-        transaction.setTransactionId(UUID.randomUUID());
         return transaction;
     }
 
     @Override
     public Transaction show(Long userId, UUID transactionId) {
-        System.out.println("Entraaa:"+userId);
-        if(userId == 1l) {
+        if(userId.equals(1l)) {
           return transactions.peek();
         }else {
           return null;
@@ -40,7 +42,11 @@ public class TransactionGatewayMock implements TransactionGateway {
     }
 
     @Override
-    public List<Transaction> list(Long userId) {
-        return null;
+    public Queue<Transaction> list(Long userId) {
+        if(userId.equals(1l)) {
+            return this.transactions;
+        }else {
+            return null;
+        }
     }
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Transaction {
+public class Transaction implements Comparable {
     private BigDecimal amount;
     private String description;
     private LocalDate date;
@@ -58,4 +58,13 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        LocalDate d = ((Transaction)o).getDate();
+        if(this.date.isAfter(d)) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }

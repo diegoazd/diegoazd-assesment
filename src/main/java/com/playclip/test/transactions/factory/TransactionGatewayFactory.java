@@ -11,7 +11,7 @@ public class TransactionGatewayFactory {
             case MOCK:
                 return new TransactionGatewayMock();
            case FILE_SYSTEM:
-               return null;
+               return new TransactionGatewayFileSystem();
         }
 
         throw new RuntimeException("Invalid option");

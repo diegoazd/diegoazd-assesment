@@ -18,6 +18,6 @@ public class TransactionGatewayFactoryTest {
     @Test
     public void shouldGetFileSystemInterface() {
         StorageState.setStorageInterfaceType(StorageInterfaceType.FILE_SYSTEM);
-        assertTrue(TransactionGatewayFactory.getGateway() == null);
+        assertTrue(TransactionGatewayFactory.getGateway() instanceof TransactionGatewayFileSystem);
     }
 }

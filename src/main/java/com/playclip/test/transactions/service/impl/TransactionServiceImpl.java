@@ -6,6 +6,7 @@ import com.playclip.test.transactions.factory.TransactionGatewayFactory;
 import com.playclip.test.transactions.gateway.TransactionGateway;
 import com.playclip.test.transactions.service.TransactionService;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Queue;
 import java.util.UUID;
@@ -19,7 +20,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction add(Transaction transaction) {
+    public Transaction add(Transaction transaction) throws IOException {
         transaction.setTransactionId(UUID.randomUUID());
         return transactionGateway.add(transaction);
     }

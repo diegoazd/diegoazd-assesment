@@ -8,6 +8,7 @@ import com.playclip.test.transactions.service.TransactionService;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Queue;
@@ -25,7 +26,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void shouldAddTransaction() {
+    public void shouldAddTransaction() throws IOException {
         Transaction transaction = new Transaction(1l, LocalDate.of(2018, 04,18),
                 BigDecimal.valueOf(150.00d), "test description");
         Transaction response = transactionService.add(transaction);

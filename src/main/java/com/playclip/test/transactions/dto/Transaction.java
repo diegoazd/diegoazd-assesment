@@ -1,5 +1,6 @@
 package com.playclip.test.transactions.dto;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -69,5 +70,11 @@ public class Transaction implements Comparable<Transaction> {
         }else {
             return 0;
         }
+    }
+
+    @Override
+    public String toString() {
+        return transactionId.toString()+File.separator+amount.toString()+File.separator+
+                description+File.separator+date.toString()+File.separator+userId.toString();
     }
 }

@@ -26,7 +26,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction show(Long userId, UUID transactionId) {
+    public Transaction show(Long userId, UUID transactionId) throws IOException {
         return transactionGateway.show(userId, transactionId);
     }
 

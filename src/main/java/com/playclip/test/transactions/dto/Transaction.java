@@ -20,6 +20,14 @@ public class Transaction implements Comparable<Transaction> {
         this.description = description;
     }
 
+    public Transaction(String[] lineTransaction) {
+      this.transactionId = UUID.fromString(lineTransaction[0]);
+      this.amount = new BigDecimal(lineTransaction[1]);
+      this.description = lineTransaction[2];
+      this.date = LocalDate.parse(lineTransaction[3]);
+      this.userId = Long.valueOf(lineTransaction[4]);
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }

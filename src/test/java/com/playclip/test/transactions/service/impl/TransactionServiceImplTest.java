@@ -38,13 +38,13 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void shouldShowTransaction() {
+    public void shouldShowTransaction() throws IOException {
         Transaction transaction = transactionService.show(1l, UUID.randomUUID());
         assertNotNull(transaction);
     }
 
     @Test
-    public void shouldNotFoundTransaction() {
+    public void shouldNotFoundTransaction() throws IOException {
         Transaction transaction = transactionService.show(2l, UUID.randomUUID());
         assertNull(transaction);
     }

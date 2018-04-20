@@ -1,7 +1,6 @@
 package com.playclip.test.transactions.factory;
 
 import com.playclip.test.transactions.dto.Transaction;
-import com.playclip.test.transactions.exceptions.UserTransactionException;
 import com.playclip.test.transactions.gateway.TransactionGateway;
 import org.junit.After;
 import org.junit.Before;

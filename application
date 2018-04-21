@@ -6,7 +6,6 @@ from subprocess import call
  
 total = len(sys.argv)
 cmdargs = str(sys.argv)
-print ("Args list: %s " % cmdargs)
 
 if total < 3:
     print ("Invalid arguments")
@@ -19,11 +18,11 @@ if cmd == 'add' and total < 4:
     print ('Invalid numer arguments')
     os._exit(1)
 
+arg1='-DuserId='+userId
+arg2='-Dcmd='+cmd
+javaExec=["java", "-jar", "build/libs/diegoazd-assesment-0.1.0-SNAPSHOT.jar", arg1, arg2]
+
 if cmd == 'add':
-    arg1='-DuserId='+userId
-    arg2='-Dcmd='+cmd
-    javaExec=["java", "-jar", "build/libs/diegoazd-assesment-0.1.0-SNAPSHOT.jar", arg1, arg2]
-    
     for i in range(3,len(sys.argv)):
         current=sys.argv[i].split(":")
         currentArg='-D'+current[0]+'='+current[1]

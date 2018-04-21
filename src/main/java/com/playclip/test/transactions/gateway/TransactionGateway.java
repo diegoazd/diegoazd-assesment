@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface TransactionGateway {
 
-    void add(Transaction transaction) throws IOException;
+    void add(Long userId, Transaction transaction) throws IOException;
     Transaction show(Long userId, UUID transactionId) throws IOException;
     Queue<Transaction> list(Long userId) throws IOException;
 }

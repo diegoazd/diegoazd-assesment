@@ -20,9 +20,9 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction add(Transaction transaction) throws IOException {
+    public Transaction add(Long userId, Transaction transaction) throws IOException {
         transaction.setTransactionId(UUID.randomUUID());
-        transactionGateway.add(transaction);
+        transactionGateway.add(userId, transaction);
 
         return transaction;
     }

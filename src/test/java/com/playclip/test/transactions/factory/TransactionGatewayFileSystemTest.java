@@ -50,8 +50,8 @@ public class TransactionGatewayFileSystemTest {
                 LocalDate.of(2015,12,21), BigDecimal.ONE,
                 "description2");
         transaction2.setTransactionId(UUID.randomUUID());
-        transactionGateway.add(transaction);
-        transactionGateway.add(transaction2);
+        transactionGateway.add(userId, transaction);
+        transactionGateway.add(userId, transaction2);
 
         try (Stream<String> lines = Files.lines(Paths.get(userId.toString()))) {
             assertTrue(2l == lines.count());
@@ -70,7 +70,7 @@ public class TransactionGatewayFileSystemTest {
                 "description2");
         UUID uuid = UUID.randomUUID();
         transaction.setTransactionId(uuid);
-        transactionGateway.add(transaction);
+        transactionGateway.add(userId, transaction);
         assertNull(transactionGateway.show(userId, UUID.randomUUID()));
     }
 
@@ -124,8 +124,8 @@ public class TransactionGatewayFileSystemTest {
                 "description2");
         UUID uuid = UUID.randomUUID();
         transaction2.setTransactionId(uuid);
-        transactionGateway.add(transaction);
-        transactionGateway.add(transaction2);
+        transactionGateway.add(userId, transaction);
+        transactionGateway.add(userId, transaction2);
 
         return uuid;
     }

@@ -18,6 +18,7 @@ public class AddTransactionCommand implements TransactionCommand {
 
     @Override
     public void execute(Map<String, String> arguments) throws IOException {
-        transactionService.add(new Transaction().getTransactionFromMap(arguments));
+        transactionService.add(Long.valueOf(arguments.get("userId")),
+                new Transaction().getTransactionFromMap(arguments));
     }
 }

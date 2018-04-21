@@ -17,8 +17,8 @@ import java.util.UUID;
 public class TransactionGatewayFileSystem implements TransactionGateway {
 
     @Override
-    public void add(Transaction transaction) throws IOException {
-        File file = getUserIdFile(transaction.getUserId().toString());
+    public void add(Long userId, Transaction transaction) throws IOException {
+        File file = getUserIdFile(userId.toString());
         FileUtils.writeStringToFile(file, transaction.toString()+"\n",
                 StandardCharsets.UTF_8, true);
     }

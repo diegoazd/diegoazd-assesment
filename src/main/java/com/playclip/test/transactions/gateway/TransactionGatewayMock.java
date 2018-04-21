@@ -27,7 +27,7 @@ public class TransactionGatewayMock implements TransactionGateway {
     }
 
     @Override
-    public void add(Transaction transaction) {
+    public void add(Long userId, Transaction transaction) {
     }
 
     @Override

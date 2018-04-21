@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface TransactionService {
 
-    Transaction add(Transaction transaction) throws IOException;
+    Transaction add(Long userId, Transaction transaction) throws IOException;
     Transaction show(Long userId, UUID transactionId) throws IOException;
     Queue<Transaction> list(Long userId) throws IOException;
     UserTotal sum(Long userId) throws IOException;

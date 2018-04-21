@@ -10,24 +10,26 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.UUID;
 
 public class TransactionGatewayFileSystem implements TransactionGateway {
 
     @Override
-    public Transaction add(Transaction transaction) throws IOException {
-        File file = new File(transaction.getUserId().toString());
+    public void add(Transaction transaction) throws IOException {
+        File file = getUserIdFile(transaction.getUserId().toString());
         FileUtils.writeStringToFile(file, transaction.toString()+"\n",
                 StandardCharsets.UTF_8, true);
+    }
 
-        return transaction;
+    private File getUserIdFile(String s) {
+        return new File(s);
     }
 
     @Override
     public Transaction show(Long userId, UUID transactionId) throws IOException {
-        File file = new File(userId.toString());
-        if(file.exists()) {
+        if(getUserIdFile(userId.toString()).exists()) {
             return getTransactionFromList(Files.readAllLines(Paths.get(userId.toString())),
                     transactionId.toString());
         }
@@ -47,7 +49,20 @@ public class TransactionGatewayFileSystem implements TransactionGateway {
     }
 
     @Override
-    public Queue<Transaction> list(Long userId) {
+    public Queue<Transaction> list(Long userId) throws IOException {
+        if(getUserIdFile(userId.toString()).exists()) {
+            return getTransactionsFromStrings(
+                    Files.readAllLines(Paths.get(userId.toString())));
+        }
         return null;
+    }
+
+    private Queue<Transaction> getTransactionsFromStrings(List<String> list) {
+        Queue<Transaction> transactions = new PriorityQueue<>();
+        for(String t: list) {
+            transactions.add(new Transaction(t.split(File.separator)));
+        }
+
+        return transactions;
     }
 }

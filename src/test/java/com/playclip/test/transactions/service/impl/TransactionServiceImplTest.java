@@ -50,7 +50,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void shouldListTransactions() {
+    public void shouldListTransactions() throws IOException {
         Queue<Transaction> transactions = transactionService.list(1l);
         assertNotNull(transactions);
         Transaction transaction = transactions.remove();
@@ -73,13 +73,13 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void shouldReturnNull() {
+    public void shouldReturnNull() throws IOException {
         Queue<Transaction> transactions = transactionService.list(2l);
         assertNull(transactions);
     }
 
     @Test
-    public void shouldGetTotalFromTransactions() {
+    public void shouldGetTotalFromTransactions() throws IOException {
         UserTotal userTotal = transactionService.sum(1l);
         assertNotNull(userTotal);
         assertEquals(userTotal.getUserId(), Long.valueOf(1l));
@@ -87,7 +87,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void shouldGetTotalZeroWhenUserNotFound() {
+    public void shouldGetTotalZeroWhenUserNotFound() throws IOException {
         UserTotal userTotal = transactionService.sum(2l);
         assertNotNull(userTotal);
         assertEquals(userTotal.getUserId(), Long.valueOf(2l));

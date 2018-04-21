@@ -22,7 +22,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction add(Transaction transaction) throws IOException {
         transaction.setTransactionId(UUID.randomUUID());
-        return transactionGateway.add(transaction);
+        transactionGateway.add(transaction);
+
+        return transaction;
     }
 
     @Override
@@ -31,12 +33,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Queue<Transaction> list(Long userId) {
+    public Queue<Transaction> list(Long userId) throws IOException {
         return transactionGateway.list(userId);
     }
 
     @Override
-    public UserTotal sum(Long userId) {
+    public UserTotal sum(Long userId) throws IOException {
         Queue<Transaction> transactions = transactionGateway.list(userId);
 
         if(transactions == null) {

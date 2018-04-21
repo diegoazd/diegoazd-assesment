@@ -1,7 +1,6 @@
 package com.playclip.test.transactions.gateway;
 
 import com.playclip.test.transactions.dto.Transaction;
-import com.playclip.test.transactions.dto.UserTotal;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -28,8 +27,7 @@ public class TransactionGatewayMock implements TransactionGateway {
     }
 
     @Override
-    public Transaction add(Transaction transaction) {
-        return transaction;
+    public void add(Transaction transaction) {
     }
 
     @Override

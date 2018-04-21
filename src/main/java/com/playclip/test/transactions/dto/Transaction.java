@@ -3,7 +3,7 @@ package com.playclip.test.transactions.dto;
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Comparator;
+import java.util.Map;
 import java.util.UUID;
 
 public class Transaction implements Comparable<Transaction> {
@@ -12,6 +12,8 @@ public class Transaction implements Comparable<Transaction> {
     private LocalDate date;
     private Long userId;
     private UUID transactionId;
+
+    public Transaction() {}
 
     public Transaction(Long userId, LocalDate date, BigDecimal amount, String description) {
         this.userId = userId;
@@ -84,5 +86,24 @@ public class Transaction implements Comparable<Transaction> {
     public String toString() {
         return transactionId.toString()+File.separator+amount.toString()+File.separator+
                 description+File.separator+date.toString()+File.separator+userId.toString();
+    }
+
+    public Transaction getTransactionFromMap(Map<String, String> map) {
+
+        if(map.get("amount") == null || map.get("user_id") == null ||
+                map.get("description") == null || map.get("date") == null) {
+            throw new RuntimeException("Invalid argument");
+        }
+
+        BigDecimal amount = new BigDecimal(map.get("amount"));
+        Long userId = Long.valueOf(map.get("user_id"));
+        LocalDate date = LocalDate.parse(map.get("date"));
+        Transaction t = new Transaction();
+        t.setAmount(amount);
+        t.setDate(date);
+        t.setDescription(map.get("description"));
+        t.setUserId(userId);
+
+        return t;
     }
 }

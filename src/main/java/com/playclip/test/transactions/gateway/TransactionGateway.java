@@ -3,7 +3,6 @@ package com.playclip.test.transactions.gateway;
 import com.playclip.test.transactions.dto.Transaction;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Queue;
 import java.util.UUID;
 

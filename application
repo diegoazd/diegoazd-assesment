@@ -1,0 +1,33 @@
+#!/usr/bin/python
+import sys
+import os
+from subprocess import call
+
+ 
+total = len(sys.argv)
+cmdargs = str(sys.argv)
+print ("Args list: %s " % cmdargs)
+
+if total < 3:
+    print ("Invalid arguments")
+    os._exit(1)
+
+userId = sys.argv[1]
+cmd = sys.argv[2]
+
+if cmd == 'add' and total < 4:
+    print ('Invalid numer arguments')
+    os._exit(1)
+
+if cmd == 'add':
+    arg1='-DuserId='+userId
+    arg2='-Dcmd='+cmd
+    javaExec=["java", "-jar", "build/libs/diegoazd-assesment-0.1.0-SNAPSHOT.jar", arg1, arg2]
+    
+    for i in range(3,len(sys.argv)):
+        current=sys.argv[i].split(":")
+        currentArg='-D'+current[0]+'='+current[1]
+        javaExec.append(currentArg)
+
+    call(javaExec)
+

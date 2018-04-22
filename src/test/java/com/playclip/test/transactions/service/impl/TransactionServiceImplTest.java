@@ -54,10 +54,10 @@ public class TransactionServiceImplTest {
         Queue<Transaction> transactions = transactionService.list(1l);
         assertNotNull(transactions);
         Transaction transaction = transactions.remove();
-        assertEquals(LocalDate.of(2018,04,16),
+        assertEquals(LocalDate.of(2018,04,17),
                 transaction.getDate());
-        assertEquals(BigDecimal.valueOf(151.00d), transaction.getAmount());
-        assertEquals("test description2", transaction.getDescription());
+        assertEquals(BigDecimal.valueOf(150.00d), transaction.getAmount());
+        assertEquals("test description", transaction.getDescription());
 
         transaction = transactions.remove();
         assertEquals(LocalDate.of(2018,04,16),
@@ -66,10 +66,10 @@ public class TransactionServiceImplTest {
         assertEquals("test description3", transaction.getDescription());
 
         transaction = transactions.remove();
-        assertEquals(LocalDate.of(2018,04,17),
+        assertEquals(LocalDate.of(2018,04,16),
                 transaction.getDate());
-        assertEquals(BigDecimal.valueOf(150.00d), transaction.getAmount());
-        assertEquals("test description", transaction.getDescription());
+        assertEquals(BigDecimal.valueOf(151.00d), transaction.getAmount());
+        assertEquals("test description2", transaction.getDescription());
     }
 
     @Test

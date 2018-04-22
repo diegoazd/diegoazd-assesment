@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TransactionInputTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -58,7 +59,21 @@ public class TransactionInputTest {
     public void shouldPrintTransactionForShowOperation() throws IOException {
         String[] input = {"-DuserId=1","-Dcmd=2299ce24-9eaf-417f-82d6-e57f93777dc4"};
         TransactionInput.main(input);
-        String json = "{\"amount\":151.0,\"description\":\"test description2\",\"date\":\"2018-04-16\",\"userId\":1,\"transactionId\":null}\n";
-        assertEquals(json, outContent.toString());
+        String json = "{\"amount\":150.0,\"description\":\"test description\",\"date\":\"2018-04-17\",\"userId\":1,\"transactionId\":";
+        assertEquals(json, outContent.toString().substring(0,96));
+    }
+
+    @Test
+    public void shouldPrintEmptyListWhenUserNotFound() throws IOException {
+        String[] input = {"-DuserId=2","-Dcmd=list"};
+        TransactionInput.main(input);
+        assertEquals("[\n]\n", outContent.toString());
+    }
+
+    @Test
+    public void shouldPrintTransactionList() throws IOException {
+        String[] input = {"-DuserId=1","-Dcmd=list"};
+        TransactionInput.main(input);
+        assertNotEquals("[\n]\n", outContent.toString());
     }
 }

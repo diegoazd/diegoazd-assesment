@@ -96,14 +96,14 @@ public class TransactionGatewayFileSystemTest {
         assertNotNull(transactions);
         assertTrue(transactions.size() == 2);
         Transaction transaction = transactions.remove();
-        assertEquals(transaction.getDate(), LocalDate.of(2015,12,21));
-        assertEquals(transaction.getAmount(), BigDecimal.ONE);
-        assertEquals("description2", transaction.getDescription());
-
-        transaction = transactions.remove();
         assertEquals(transaction.getDate(), LocalDate.of(2015,12,23));
         assertEquals(transaction.getAmount(), BigDecimal.TEN);
         assertEquals("description", transaction.getDescription());
+
+        transaction = transactions.remove();
+        assertEquals(transaction.getDate(), LocalDate.of(2015,12,21));
+        assertEquals(transaction.getAmount(), BigDecimal.ONE);
+        assertEquals("description2", transaction.getDescription());
 
 
         assertTrue(transactions.isEmpty());

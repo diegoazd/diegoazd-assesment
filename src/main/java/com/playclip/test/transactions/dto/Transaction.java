@@ -76,9 +76,9 @@ public class Transaction implements Comparable<Transaction> {
     @Override
     public int compareTo(Transaction o) {
         if(this.date.isAfter(o.date)) {
-            return 1;
-        }else if(this.date.isBefore(o.date)){
             return -1;
+        }else if(this.date.isBefore(o.date)){
+            return 1;
         }else {
             return 0;
         }

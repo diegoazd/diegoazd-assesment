@@ -3,7 +3,7 @@ Backend assesment
 
 #### Requeriments:
   * Java 8
-  * Python 2.7
+  * Python(Installed in /usr/bin/python)
 
 ##### Example transaction json: 
 `{"amount":1.23,"description":"Joes Tacos","date":"2018-12-10","user_id":345}`

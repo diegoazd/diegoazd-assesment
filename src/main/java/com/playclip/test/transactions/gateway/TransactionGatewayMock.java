@@ -11,6 +11,9 @@ public class TransactionGatewayMock implements TransactionGateway {
     Queue<Transaction> transactions;
 
     public TransactionGatewayMock() {
+    }
+
+    private void buildTransactions() {
         transactions = new PriorityQueue<>();
         Transaction transaction = new Transaction(1l, LocalDate.of(2018, 04,17),
                 BigDecimal.valueOf(150.00d), "test description");
@@ -33,6 +36,7 @@ public class TransactionGatewayMock implements TransactionGateway {
     @Override
     public Transaction show(Long userId, UUID transactionId) {
         if(userId.equals(1l)) {
+            buildTransactions();
           return transactions.peek();
         }else {
           return null;
@@ -42,6 +46,7 @@ public class TransactionGatewayMock implements TransactionGateway {
     @Override
     public Queue<Transaction> list(Long userId) {
         if(userId.equals(1l)) {
+            buildTransactions();
             return this.transactions;
         }else {
             return null;

@@ -76,4 +76,18 @@ public class TransactionInputTest {
         TransactionInput.main(input);
         assertNotEquals("[\n]\n", outContent.toString());
     }
+
+    @Test
+    public void shouldPrintEmptyTransactionSum() throws IOException {
+        String[] input = {"-DuserId=2","-Dcmd=sum"};
+        TransactionInput.main(input);
+        assertEquals("{}\n", outContent.toString());
+    }
+
+    @Test
+    public void shouldPrintUserSumOfTransactions() throws IOException {
+        String[] input = {"-DuserId=1","-Dcmd=sum"};
+        TransactionInput.main(input);
+        assertEquals("{\"userId\":1,\"sum\":453.0}\n", outContent.toString());
+    }
 }

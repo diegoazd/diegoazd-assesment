@@ -89,9 +89,7 @@ public class TransactionServiceImplTest {
     @Test
     public void shouldGetTotalZeroWhenUserNotFound() throws IOException {
         UserTotal userTotal = transactionService.sum(2l);
-        assertNotNull(userTotal);
-        assertEquals(userTotal.getUserId(), Long.valueOf(2l));
-        assertEquals(userTotal.getSum(), BigDecimal.ZERO);
+        assertNull(userTotal);
     }
 
 }

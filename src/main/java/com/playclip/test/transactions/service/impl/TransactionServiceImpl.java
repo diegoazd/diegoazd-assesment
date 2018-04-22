@@ -42,7 +42,7 @@ public class TransactionServiceImpl implements TransactionService {
         Queue<Transaction> transactions = transactionGateway.list(userId);
 
         if(transactions == null) {
-            return new UserTotal(userId, BigDecimal.ZERO);
+            return null;
         }
         return getUserTotal(transactions, userId);
     }

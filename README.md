@@ -1,6 +1,10 @@
 Backend assesment
 -----------------------
 
+##Requeriments:
+  * Java 8
+  * Python 2.7
+
 The application has 4 commands:
    show:
          ./application 39855 add {"amount":1.23,"description":"Joes Tacos","date":"2018-12-10","user_id":345}

@@ -1,7 +1,6 @@
 package com.playclip.test.transactions.gateway;
 
 import com.playclip.test.transactions.dto.Transaction;
-import com.playclip.test.transactions.gateway.TransactionGateway;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

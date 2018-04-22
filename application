@@ -18,7 +18,7 @@ cmd = sys.argv[2]
 
 arg1='-DuserId='+userId
 arg2='-Dcmd='+cmd
-javaExec=["java", "-jar", "build/libs/diegoazd-assesment-0.1.0-SNAPSHOT.jar", arg1, arg2]
+javaExec=["java", "-jar", "diegoazd-assesment-1.0.jar", arg1, arg2]
 
 if cmd == 'add' and total < 4:
     print ('Invalid numner arguments')

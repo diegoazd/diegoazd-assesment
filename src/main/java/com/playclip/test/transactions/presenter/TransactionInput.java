@@ -2,6 +2,7 @@ package com.playclip.test.transactions.presenter;
 
 import com.beust.jcommander.DynamicParameter;
 import com.beust.jcommander.JCommander;
+import com.playclip.test.transactions.command.TransactionCommand;
 import com.playclip.test.transactions.command.impl.AddTransactionCommand;
 import com.playclip.test.transactions.command.impl.ListTransactionCommand;
 import com.playclip.test.transactions.command.impl.ShowTransactionCommand;
@@ -23,19 +24,23 @@ public class TransactionInput {
                 .build()
                 .parse(args);
 
-        switch (main.params.get("cmd")) {
+        final String cmd = main.params.get("cmd");
+        switch (cmd) {
             case "add":
-                new AddTransactionCommand().execute(main.params);
+                execute(new AddTransactionCommand(), main.params);
                 break;
             case "list":
-                new ListTransactionCommand().execute(main.params);
+                execute(new ListTransactionCommand(), main.params);
                 break;
             case "sum":
-                new SumTransactionCommand().execute(main.params);
+                execute(new SumTransactionCommand(), main.params);
                 break;
             default:
-                new ShowTransactionCommand().execute(main.params);
+                execute(new ShowTransactionCommand(), main.params);
         }
+    }
 
+    private static void execute(TransactionCommand command, Map<String, String> params) throws IOException {
+        command.execute(params);
     }
 }

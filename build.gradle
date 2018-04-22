@@ -24,6 +24,9 @@ apply from: 'gradle/publishing.gradle'
 apply from: 'gradle/code-coverage.gradle'
 apply from: 'gradle/code-quality.gradle'
 
+archivesBaseName = 'diegoazd-assesment'
+version = '1.0'
+
 repositories {
     jcenter()
 }
@@ -55,6 +58,7 @@ task sourcesJar(type: Jar) {
 }
 
 jar.finalizedBy sourcesJar
+test.finalizedBy jacocoTestReport
 
 artifacts {
     sourcesJar

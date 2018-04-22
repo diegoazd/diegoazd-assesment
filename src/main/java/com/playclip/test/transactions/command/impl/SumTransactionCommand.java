@@ -1,5 +1,6 @@
 package com.playclip.test.transactions.command.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.playclip.test.transactions.command.TransactionCommand;
 import com.playclip.test.transactions.dto.UserTotal;
 import com.playclip.test.transactions.presenter.JsonPrinter;
@@ -21,12 +22,14 @@ public class SumTransactionCommand implements TransactionCommand {
 
     @Override
     public void execute(Map<String, String> arguments) throws IOException {
-        UserTotal total = transactionService.sum(
-                Long.valueOf(arguments.get("userId")));
+        printSumJson(transactionService.sum(
+                Long.valueOf(arguments.get("userId"))));
+    }
+
+    private void printSumJson(UserTotal total) throws JsonProcessingException {
         if(total == null)
             System.out.println("{}");
         else
             jsonPrinter.printTotalJson(total);
-
     }
 }

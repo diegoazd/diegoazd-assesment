@@ -1,8 +1,5 @@
 package com.playclip.test.transactions.command.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.playclip.test.transactions.command.TransactionCommand;
 import com.playclip.test.transactions.dto.Transaction;
 import com.playclip.test.transactions.presenter.JsonPrinter;

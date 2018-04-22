@@ -5,16 +5,14 @@ import com.playclip.test.transactions.gateway.TransactionGateway;
 import com.playclip.test.transactions.gateway.TransactionGatewayFileSystem;
 import com.playclip.test.transactions.gateway.TransactionGatewayMock;
 
+import static com.playclip.test.transactions.config.StorageInterfaceType.MOCK;
+
 public class TransactionGatewayFactory {
 
     public static TransactionGateway getGateway() {
-       switch (StorageState.getStorageInterfaceType()) {
-            case MOCK:
-                return new TransactionGatewayMock();
-           case FILE_SYSTEM:
-               return new TransactionGatewayFileSystem();
-        }
-
-        throw new RuntimeException("Invalid option");
+       if(StorageState.getStorageInterfaceType() == MOCK)
+           return new TransactionGatewayMock();
+        else
+          return new TransactionGatewayFileSystem();
     }
 }

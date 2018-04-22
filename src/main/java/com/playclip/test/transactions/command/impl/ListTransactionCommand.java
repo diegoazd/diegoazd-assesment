@@ -1,5 +1,6 @@
 package com.playclip.test.transactions.command.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.playclip.test.transactions.command.TransactionCommand;
 import com.playclip.test.transactions.dto.Transaction;
 import com.playclip.test.transactions.presenter.JsonPrinter;
@@ -23,11 +24,14 @@ public class ListTransactionCommand implements TransactionCommand {
     @Override
     public void execute(Map<String, String> arguments) throws IOException {
         System.out.println("[");
-        Queue<Transaction> transactions = transactionService.list(Long.valueOf(arguments.get("userId")));
+        printTranasctions(transactionService.list(Long.valueOf(arguments.get("userId"))));
+        System.out.println("]");
+    }
+
+    private void printTranasctions(Queue<Transaction> transactions) throws JsonProcessingException {
         while (transactions != null && !transactions.isEmpty()) {
             Transaction t = transactions.remove();
             jsonPrinter.printTransactionJson(t);
         }
-        System.out.println("]");
     }
 }

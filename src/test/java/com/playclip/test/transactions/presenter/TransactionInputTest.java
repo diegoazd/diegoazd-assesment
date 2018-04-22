@@ -17,8 +17,6 @@ public class TransactionInputTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
-
-
     @Before
     public void setup() {
         StorageState.setStorageInterfaceType(StorageInterfaceType.MOCK);
@@ -48,6 +46,14 @@ public class TransactionInputTest {
         assertEquals(json, outContent.toString().substring(0,92));
     }
 
+    @Test(expected = IOException.class)
+    public void shouldThrowsIOExceptionInAddoperation() throws IOException {
+        String[] input = {"-DuserId=3","-Dcmd=add", "-Duser_id=50",
+                "-Ddescription=Joes tacos", "-Damount=150.00",
+                "-Ddate=2018-01-25"};
+        TransactionInput.main(input);
+    }
+
     @Test
     public void shouldNotFoundTransaction() throws IOException {
         String[] input = {"-DuserId=2","-Dcmd=2299ce24-9eaf-417f-82d6-e57f93777dc4"};
@@ -61,6 +67,12 @@ public class TransactionInputTest {
         TransactionInput.main(input);
         String json = "{\"amount\":150.0,\"description\":\"test description\",\"date\":\"2018-04-17\",\"userId\":1,\"transactionId\":";
         assertEquals(json, outContent.toString().substring(0,96));
+    }
+
+    @Test(expected = IOException.class)
+    public void shouldThrowExceptionForShow() throws IOException {
+        String[] input = {"-DuserId=3","-Dcmd=2299ce24-9eaf-417f-82d6-e57f93777dc4"};
+        TransactionInput.main(input);
     }
 
     @Test
@@ -77,6 +89,12 @@ public class TransactionInputTest {
         assertNotEquals("[\n]\n", outContent.toString());
     }
 
+    @Test(expected = IOException.class)
+    public void shouldThrowExceptionForList() throws IOException {
+        String[] input = {"-DuserId=3","-Dcmd=list"};
+        TransactionInput.main(input);
+    }
+
     @Test
     public void shouldPrintEmptyTransactionSum() throws IOException {
         String[] input = {"-DuserId=2","-Dcmd=sum"};
@@ -89,5 +107,11 @@ public class TransactionInputTest {
         String[] input = {"-DuserId=1","-Dcmd=sum"};
         TransactionInput.main(input);
         assertEquals("{\"userId\":1,\"sum\":453.0}\n", outContent.toString());
+    }
+
+    @Test(expected = IOException.class)
+    public void shouldThowExceptionForSum() throws IOException {
+        String[] input = {"-DuserId=3","-Dcmd=sum"};
+        TransactionInput.main(input);
     }
 }

@@ -2,6 +2,7 @@ package com.playclip.test.transactions.gateway;
 
 import com.playclip.test.transactions.dto.Transaction;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -11,6 +12,7 @@ public class TransactionGatewayMock implements TransactionGateway {
     Queue<Transaction> transactions;
 
     public TransactionGatewayMock() {
+        buildTransactions();
     }
 
     private void buildTransactions() {
@@ -30,24 +32,29 @@ public class TransactionGatewayMock implements TransactionGateway {
     }
 
     @Override
-    public void add(Long userId, Transaction transaction) {
+    public void add(Long userId, Transaction transaction) throws IOException {
+        if(userId.equals(3l)) {
+            throw new IOException();
+        }
     }
 
     @Override
-    public Transaction show(Long userId, UUID transactionId) {
+    public Transaction show(Long userId, UUID transactionId) throws IOException {
         if(userId.equals(1l)) {
-            buildTransactions();
-          return transactions.peek();
+            return transactions.peek();
+        }else if(userId.equals(3l)) {
+            throw new IOException();
         }else {
           return null;
         }
     }
 
     @Override
-    public Queue<Transaction> list(Long userId) {
+    public Queue<Transaction> list(Long userId) throws IOException {
         if(userId.equals(1l)) {
-            buildTransactions();
             return this.transactions;
+        }else if(userId.equals(3l)) {
+            throw  new IOException();
         }else {
             return null;
         }

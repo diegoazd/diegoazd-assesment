@@ -22,8 +22,4 @@ public class UserTotal {
     public BigDecimal getSum() {
         return sum;
     }
-
-    public void setSum(BigDecimal sum) {
-        this.sum = sum;
-    }
 }

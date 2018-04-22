@@ -41,6 +41,9 @@ jar {
 dependencies {
     compile 'commons-io:commons-io:2.6'
     compile "com.beust:jcommander:1.71"
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.6'
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.6"
+
     testCompile 'junit:junit:4.12'
 }
 

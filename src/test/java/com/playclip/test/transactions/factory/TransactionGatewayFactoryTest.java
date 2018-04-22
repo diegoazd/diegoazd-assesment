@@ -2,6 +2,7 @@ package com.playclip.test.transactions.factory;
 
 import com.playclip.test.transactions.config.StorageInterfaceType;
 import com.playclip.test.transactions.config.StorageState;
+import com.playclip.test.transactions.gateway.TransactionGatewayFileSystem;
 import com.playclip.test.transactions.gateway.TransactionGatewayMock;
 import org.junit.Test;
 

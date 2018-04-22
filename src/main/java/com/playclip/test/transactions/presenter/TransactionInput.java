@@ -3,6 +3,7 @@ package com.playclip.test.transactions.presenter;
 import com.beust.jcommander.DynamicParameter;
 import com.beust.jcommander.JCommander;
 import com.playclip.test.transactions.command.impl.AddTransactionCommand;
+import com.playclip.test.transactions.command.impl.ShowTransactionCommand;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +24,9 @@ public class TransactionInput {
         switch (main.params.get("cmd")) {
             case "add":
                 new AddTransactionCommand().execute(main.params);
+                break;
+            default:
+                new ShowTransactionCommand().execute(main.params);
         }
 
     }

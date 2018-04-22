@@ -1,4 +1,4 @@
-package com.playclip.test.transactions.factory;
+package com.playclip.test.transactions.gateway;
 
 import com.playclip.test.transactions.dto.Transaction;
 import com.playclip.test.transactions.gateway.TransactionGateway;

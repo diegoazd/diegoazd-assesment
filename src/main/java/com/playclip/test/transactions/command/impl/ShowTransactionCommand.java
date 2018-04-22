@@ -1,8 +1,6 @@
 package com.playclip.test.transactions.command.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.playclip.test.transactions.command.TransactionCommand;
 import com.playclip.test.transactions.dto.Transaction;
 import com.playclip.test.transactions.presenter.JsonPrinter;
@@ -11,21 +9,29 @@ import com.playclip.test.transactions.service.impl.TransactionServiceImpl;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
-public class AddTransactionCommand implements TransactionCommand {
-
+public class ShowTransactionCommand implements TransactionCommand {
     TransactionService transactionService;
     JsonPrinter jsonPrinter;
 
-    public AddTransactionCommand() {
+    public ShowTransactionCommand() {
         transactionService = new TransactionServiceImpl();
         jsonPrinter = new JsonPrinter();
     }
 
     @Override
     public void execute(Map<String, String> arguments) throws IOException {
-        jsonPrinter.printTransactionJson(transactionService.add(
-                Long.valueOf(arguments.get("userId")),
-                new Transaction().getTransactionFromMap(arguments)));
+        final Long userId = Long.valueOf(arguments.get("userId"));
+        final UUID uuid = UUID.fromString(arguments.get("cmd"));
+        printResponse(transactionService.show(userId, uuid));
+    }
+
+    private void printResponse(Transaction transaction) throws JsonProcessingException {
+        if(transaction == null) {
+            System.out.println("Transaction not found");
+        }else {
+            jsonPrinter.printTransactionJson(transaction);
+        }
     }
 }

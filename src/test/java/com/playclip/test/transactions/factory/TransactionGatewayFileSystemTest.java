@@ -2,6 +2,7 @@ package com.playclip.test.transactions.factory;
 
 import com.playclip.test.transactions.dto.Transaction;
 import com.playclip.test.transactions.gateway.TransactionGateway;
+import com.playclip.test.transactions.gateway.TransactionGatewayFileSystem;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

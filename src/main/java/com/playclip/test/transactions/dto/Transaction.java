@@ -1,5 +1,6 @@
 package com.playclip.test.transactions.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.util.UUID;
 public class Transaction implements Comparable<Transaction> {
     private BigDecimal amount;
     private String description;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
     private Long userId;
     private UUID transactionId;

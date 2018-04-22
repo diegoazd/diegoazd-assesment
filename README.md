@@ -1,16 +1,14 @@
 Backend assesment
 -----------------------
 
-##Requeriments:
+#### Requeriments:
   * Java 8
   * Python 2.7
 
-The application has 4 commands:
-   show:
-         ./application 39855 add {"amount":1.23,"description":"Joes Tacos","date":"2018-12-10","user_id":345}
+##### Example transaction json: 
+`{"amount":1.23,"description":"Joes Tacos","date":"2018-12-10","user_id":345}`
 
-
-The application has 4 commands
+##### The application has 4 commands
 
     add: Appends a transaction to the user
        ./application <user_id> add <transaction_json>
